@@ -21,6 +21,8 @@ ApplicationWindow {
     id: appWindow
     // visibile must set to true - default is false
     visible: true
+    width : (Qt.platform.os === "ios" || Qt.platform.os === "android") ? Screen.width : 480
+    height : (Qt.platform.os === "ios" || Qt.platform.os === "android") ? Screen.height : 800
     //
     property bool isLandscape: width > height
 
@@ -114,7 +116,7 @@ ApplicationWindow {
         {"type": "../navigation/DrawerNavigationButton.qml", "name": "Home", "icon": "home.png", "source": "../navigation/HomeNavigation.qml", "showCounter":false, "showMarker":false, "a_p":1},
         {"type": "../navigation/DrawerDivider.qml", "name": "", "icon": "", "source": "", "a_p":1},
         {"type": "../navigation/DrawerSubtitle.qml", "name": "Transitoptions", "icon": "", "source": "", "a_p":1},
-        {"type": "../navigation/DrawerNavigationButton.qml", "name": "Car", "icon": "car.png", "source": "../pages/PageOne.qml", "showCounter":true, "showMarker":false, "a_p":2},
+        {"type": "../navigation/DrawerNavigationButton.qml", "name": "Car", "icon": "car.png", "source": "../pages/ReaderPage.qml", "showCounter":true, "showMarker":false, "a_p":2},
         {"type": "../navigation/DrawerNavigationButton.qml", "name": "Bus", "icon": "bus.png", "source": "../pages/PageTwo.qml", "showCounter":false, "showMarker":false, "a_p":2},
         {"type": "../navigation/DrawerNavigationButton.qml", "name": "Subway", "icon": "subway.png", "source": "../pages/PageThree.qml", "showCounter":false, "showMarker":true, "a_p":3},
         {"type": "../navigation/DrawerNavigationButton.qml", "name": "Truck", "icon": "truck.png", "source": "../pages/PageFour.qml", "showCounter":false, "showMarker":false, "a_p":2},

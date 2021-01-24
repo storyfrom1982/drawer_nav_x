@@ -77,3 +77,6 @@ qtPrepareTool(LRELEASE, lrelease)
      command = $$LRELEASE $$tsfile
      system($$command)|error("Failed to run: $$command")
  }
+
+DISTFILES += \
+    pages/ReaderPage.qml
