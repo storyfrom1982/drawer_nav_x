@@ -4,6 +4,9 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
 import QtQuick.Controls.Material 2.2
 import QtGraphicalEffects 1.0
+import QtMultimedia 5.15
+
+import VideoLib 1.0
 
 import "../common"
 import "../popups"
@@ -26,6 +29,52 @@ Flickable {
                 bottomPadding: 16
                 text: qsTr("The Home Page")
             }
+
+            CameraFilter {
+                id: cameraFilter
+            }
+
+            VideoRenderer {
+                id: videoRenderer
+            }
+
+            Rectangle {
+                color: "green"
+//                implicitWidth: 640
+                implicitHeight: 320
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                VideoOutput {
+                    anchors.fill: parent
+                    fillMode: VideoOutput.PreserveAspectFit //Stretch //PreserveAspectCrop //PreserveAspectFit
+                    source: videoRenderer
+                }
+            }
+
+            Rectangle {
+                color: "red"
+//                implicitWidth: 640
+                implicitHeight: 320
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                VideoOutput {
+                    id: cameraView
+                    anchors.fill: parent
+                    fillMode: VideoOutput.PreserveAspectFit //Stretch //PreserveAspectCrop //PreserveAspectFit
+//                    orientation: 90
+                    autoOrientation: true
+                    filters: [cameraFilter]
+                    source: camera
+                    Camera {
+                        id: camera
+                        captureMode: Camera.CaptureVideo
+                    }
+                }
+                Component.onCompleted: {
+
+                }
+            }
+
             RowLayout {
                 IconInactive {
                     imageName: modelData.icon
@@ -92,14 +141,36 @@ Flickable {
             }
             HorizontalDivider {}
 
+            ButtonFlat {
+                enabled: true
+                radius: 30
+//                Layout.fillWidth: true
+//                implicitWidth: 300
+//                implicitHeight: 40
+                text: qsTr("Modal Popup Test")
+                onClicked: {
+                    camera.stop()
+//                    popupTestModal.open()
+                }
+            }
+
             RowLayout {
                 ButtonFlat {
-                    text: qsTr("Modal Popup Test")
-
+                    enabled: true
+//                    Layout.fillWidth: true
+                    implicitWidth: 300
+//                    implicitHeight: 80
+                    text: qsTr("Modal Popup Test eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
                     onClicked: {
-                        popupTestModal.open()
+//                        popupTestModal.open()
+//                        cameraFilter.setVideoSurface(cameraView.videoSurface)
+                        cameraFilter.setVideoRenderer(videoRenderer)
+//                        cameraFilter.setCamera(camera)
+//                        camera.start()
+//                        cameraView.source = camera
                     }
                 }
+
             }
 
             HorizontalDivider {}

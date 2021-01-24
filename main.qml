@@ -21,6 +21,10 @@ ApplicationWindow {
     id: appWindow
     // visibile must set to true - default is false
     visible: true
+
+//    width : (Qt.platform.os === "ios" || Qt.platform.os === "android") ? Screen.width : 480
+//    height : (Qt.platform.os === "ios" || Qt.platform.os === "android") ? Screen.height : 720
+
     //
     property bool isLandscape: width > height
 

@@ -2,15 +2,19 @@
 TEMPLATE = app
 TARGET = drawer_nav_x
 
-QT += qml quick core
+QT += qml quick core multimedia
 CONFIG += c++11
 
 HEADERS += \
     applicationui.hpp \
+    src/camerafilter.h \
+    src/videorenderer.h \
     uiconstants.hpp
 
 SOURCES += main.cpp \
-    applicationui.cpp
+    applicationui.cpp \
+    src/camerafilter.cpp \
+    src/videorenderer.cpp
 
 lupdate_only {
     SOURCES +=  main.qml \

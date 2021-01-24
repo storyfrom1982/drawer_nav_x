@@ -5,6 +5,9 @@
 #include <QTranslator>
 #include <QQmlContext>
 
+#include <src/camerafilter.h>
+#include <src/videorenderer.h>
+
 #include "applicationui.hpp"
 
 int main(int argc, char *argv[])
@@ -22,6 +25,9 @@ int main(int argc, char *argv[])
 
     ApplicationUI appui;
     QQmlApplicationEngine engine;
+
+    CameraFilter::registerQmlType();
+    VideoRenderer::registerQmlType();
 
     // from QML we have access to ApplicationUI as myApp
     QQmlContext* context = engine.rootContext();

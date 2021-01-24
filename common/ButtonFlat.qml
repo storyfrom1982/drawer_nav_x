@@ -9,12 +9,14 @@ import QtGraphicalEffects 1.0
 Button {
     id: button
     // default: flatButtonTextColor
+    property real radius: 2
     property alias textColor: buttonText.color
     focusPolicy: Qt.NoFocus
-    Layout.fillWidth: true
-    Layout.preferredWidth : 1
-    leftPadding: 6
-    rightPadding: 6
+    // Layout.fillWidth: true
+    // Layout.preferredWidth : 1
+    // leftPadding: 10
+    // rightPadding: 10
+    padding: 15
     contentItem: Text {
         id: buttonText
         text: button.text
@@ -29,10 +31,9 @@ Button {
     background:
         Rectangle {
         id: buttonBackground
-        implicitHeight: 48
-        Layout.minimumWidth: 88
         color: button.pressed ? buttonText.color : "transparent"
-        radius: 2
-        opacity: button.pressed ? 0.12 : 1.0
+        border.color: buttonText.color
+        radius: button.radius
+        opacity: button.pressed ? 0.32 : button.hovered ? 0.12 : 0.22
     } // background
 } // button
