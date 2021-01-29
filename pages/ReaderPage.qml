@@ -10,7 +10,8 @@ Flickable {
 
     id: flickable
 
-    contentHeight: root.implicitHeight
+//    implicitWidth: root.implicitWidth
+//    contentHeight: root.implicitHeight
     // index to get access to Loader (Destination)
     property int myIndex: index
     // StackView manages this, so please no anchors here
@@ -22,13 +23,11 @@ Flickable {
         id: root
         anchors.fill: parent
 
-
-
         ColumnLayout {
-            anchors.right: parent.right
-            anchors.left: parent.left
+            anchors.fill: parent
 
             LabelHeadline {
+                id: head
                 Layout.alignment: Qt.AlignHCenter
                 horizontalAlignment: Text.AlignHCenter
                 text: qsTr("Drive by Car")
@@ -36,19 +35,20 @@ Flickable {
             }
 
             Rectangle{
-//                Layout.preferredHeight: 600
-                implicitHeight: 600
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                color: "green"
+                anchors.top: head.bottom
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.bottom: parent.bottom
+                color: "transparent"
+
                 ListView {
                     id: lv
                     layoutDirection: Qt.RightToLeft
                     orientation: ListView.Horizontal
                     anchors.fill: parent
                     clip: true
-                    spacing: 20
-                    model: 100000
+                    spacing: 1
+                    model: 1000
                     delegate: numberDelegate
 
                 }
@@ -56,14 +56,37 @@ Flickable {
                 Component {
                     id: numberDelegate
 
-                    Rectangle {
-                        width: 80
-                        height: lv.height
-                        color: "red"
+                    Row {
 
-                        ColumnLayout {
-                            Text {
-                                text: "index " + index
+                        VerticalDivider {}
+
+                        Rectangle {
+                            width: 40
+                            implicitHeight: lv.height
+                            color: "transparent"
+
+                            Column {
+                                anchors.fill: parent
+
+                                Repeater {
+
+                                    model: lv.height > 40 ? (lv.height - 40) / 40 : 0
+                                    delegate: Rectangle {
+                                        width: parent.width
+                                        height: 40
+                                        color: "transparent"
+                                        Text {
+                                            anchors.centerIn: parent
+                                            font.pixelSize: fontSizeHeadline
+                                            text: index
+//                                            text: qsTr("文")
+                                        }
+                                    }
+                                }
+                            }
+
+                            Component.onCompleted: {
+//                                console.debug("index ======= " + index)
                             }
                         }
 
