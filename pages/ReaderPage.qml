@@ -18,6 +18,31 @@ Flickable {
     // anchors.fill: parent
     property string name: "PageThree"
 
+    Popup{
+        id: popText
+
+        property var pos
+        property alias text: name.text
+        property alias pixelSize: name.font.pixelSize
+
+        x: pos.x
+        y: pos.y
+        z: 3
+
+        width: 256
+        height: 256
+
+//        modal: true
+
+        Rectangle {
+
+            Text {
+                id: name
+                text: qsTr("text")
+            }
+        }
+    }
+
 
     Pane {
         id: root
@@ -49,50 +74,58 @@ Flickable {
                     clip: true
                     spacing: 1
                     model: 1000
-                    delegate: numberDelegate
+                    delegate: readerDelegate
 
                 }
 
                 Component {
-                    id: numberDelegate
+                    id: readerDelegate
 
                     Row {
-
                         VerticalDivider {}
 
                         Rectangle {
+                            id: textDelegate
                             width: 40
                             implicitHeight: lv.height
                             color: "transparent"
+
+                            property int line: index
 
                             Column {
                                 anchors.fill: parent
 
                                 Repeater {
+                                    id: repeater
+                                    property int count: lv.height > 40 ? (lv.height - 40) / 40 : 0
+                                    model: count
 
-                                    model: lv.height > 40 ? (lv.height - 40) / 40 : 0
-                                    delegate: Rectangle {
+                                    WordButton {
+                                        id: word
                                         width: parent.width
                                         height: 40
-                                        color: "transparent"
-                                        Text {
-                                            anchors.centerIn: parent
-                                            font.pixelSize: fontSizeHeadline
-                                            text: index
-//                                            text: qsTr("文")
+                                        text: repeater.count * textDelegate.line + index
+                                        pixelSize: fontSizeHeadline
+
+                                        onClicked: {
+                                            var pos_abs = flickable.mapFromItem (word.parent, word.x, word.y);
+                                            pos_abs.x -= popText.width
+                                            pos_abs.y -= popText.height + 20
+                                            popText.pos = pos_abs
+                                            popText.text = text
+                                            popText.pixelSize = pixelSize
+                                            console.debug("listview index ======= " + pos_abs)
+                                            popText.open()
                                         }
                                     }
                                 }
                             }
 
                             Component.onCompleted: {
-//                                console.debug("index ======= " + index)
+//                                console.debug("listview index ======= " + myIndex)
                             }
                         }
 
-                        Component.onCompleted: {
-                            console.debug("index ======= " + index)
-                        }
                     }
                 }
             }

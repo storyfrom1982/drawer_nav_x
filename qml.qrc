@@ -57,5 +57,6 @@
         <file>navigation/HomeNavigation.qml</file>
         <file>pages/QtPage.qml</file>
         <file>popups/PopupTestModal.qml</file>
+        <file>common/WordButton.qml</file>
     </qresource>
 </RCC>
