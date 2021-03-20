@@ -29,10 +29,10 @@ Flickable {
         //            bottom:10
         //        }
 
-        Rectangle{
-            anchors.fill: parent
-            color: "red"
-        }
+//        Rectangle{
+//            anchors.fill: parent
+//            color: "red"
+//        }
 
         ColumnLayout {
             anchors.topMargin: 0
@@ -45,10 +45,10 @@ Flickable {
                 horizontalAlignment: Text.AlignHCenter
                 text: qsTr("Drive by Car")
                 color: "blue"
-                background: Rectangle {
-                    anchors.fill: parent
-                    color: "green"
-                }
+//                background: Rectangle {
+//                    anchors.fill: parent
+//                    color: "green"
+//                }
             }
 
             Rectangle{
@@ -69,7 +69,7 @@ Flickable {
                     orientation: ListView.Horizontal
                     anchors.fill: parent
                     clip: true
-                    spacing: 10
+                    spacing: 1
                     model: 300
                     delegate: readerDelegate
 
@@ -103,7 +103,7 @@ Flickable {
                                         id: word_box
                                         width: lv.wordSize
                                         height: lv.wordSize
-                                        text: lv.lineHeight * textDelegate.line + index
+                                        text: (lv.lineHeight * textDelegate.line + index) % 10
                                         pixelSize: lv.wordSize
 
                                         onClicked: {
