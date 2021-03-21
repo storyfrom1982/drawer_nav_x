@@ -19,7 +19,7 @@ StackView {
         id: qtPageLoader
         active: true
         visible: false
-        source: "../pages/QtPage.qml"
+        source: "../pages/FileView.qml"
     }
 
     function pushQtPage() {

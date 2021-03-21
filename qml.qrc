@@ -58,5 +58,6 @@
         <file>pages/QtPage.qml</file>
         <file>popups/PopupTestModal.qml</file>
         <file>common/WordButton.qml</file>
+        <file>pages/FileView.qml</file>
     </qresource>
 </RCC>
